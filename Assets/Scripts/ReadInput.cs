@@ -6,32 +6,22 @@ using UnityEngine.UI;
 public class ReadInput : MonoBehaviour {
 
     public InputField inputField;
+    public InputEvalutor inputEvalutor;
     private string m_textField;
-    private string m_inputString;
-
-
-    // Checks if there is anything entered into the input field.
-    void LockInput(InputField input)
-    {
-        if (input.text.Length > 0)
-        {
-            Debug.Log("Text has been entered");
-        }
-        else if (input.text.Length == 0)
-        {
-            Debug.Log("Main Input Empty");
-        }
-    }
+   // private string m_inputString;
 
     // Use this for initialization
-    void Start () {
-
-        //inputField.onEndEdit.AddListener(delegate { LockInput(inputField); });
+    void Start ()
+    {
+      
     }
 	
 	// Update is called once per frame
-	void Update () {
-        inputField.ActivateInputField();
+	void Update ()
+    {
+        // Keeps the InputField Selected at all times
+        SetInputFieldActive();
+        // Reads the input if the enter key is pressed
         if(Input.GetKeyDown(KeyCode.Return))
         {
             ReadInputField();
@@ -42,27 +32,22 @@ public class ReadInput : MonoBehaviour {
     public void ReadInputField()
     {
         m_textField = inputField.text;
-        m_inputString = "";
         // If not null or empty
         if(!string.IsNullOrEmpty(m_textField))
         {
             // Read in value;
-            m_inputString = m_textField;
-            Debug.Log(m_inputString);
+            inputEvalutor.EvaluateInput(m_textField);
+            Debug.Log(m_textField);
         }
             
     }
 
+    // Keeps the inputfield active
     public void SetInputFieldActive()
     {
         if (!inputField.isFocused)
         {
             inputField.ActivateInputField();
         }
-    }
-
-    public string GetInputString()
-    {
-        return m_inputString;
     }
 }

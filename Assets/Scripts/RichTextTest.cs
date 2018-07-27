@@ -15,11 +15,7 @@ public class RichTextTest : MonoBehaviour {
         
         //text.GetComponent<Text>().text = 
     }
-    private void OnGUI()
-    {
-        GUIStyle style = new GUIStyle();
-        style.richText = true;
-    }
+    
 
     // Update is called once per frame
     void Update () {
