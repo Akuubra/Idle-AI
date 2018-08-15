@@ -5,8 +5,10 @@ using UnityEngine;
 public class InputEvalutor : MonoBehaviour
 {
     public FunctionList functionList;
+    public OutputController outputController;
     private string m_inputString;
-    private List<string> commandList = new List<string>() { "teach", "help", "bits" };
+    private List<string> commandList = new List<string>() { "teach", "help", "bits", "upgrade" };
+    private List<string> upgradeList = new List<string>() { };
 
 
     void Start()
@@ -21,13 +23,14 @@ public class InputEvalutor : MonoBehaviour
 
     public void EvaluateInput(string _inputString)
     {
-        _inputString = _inputString.ToLower();
         if(!string.IsNullOrEmpty(_inputString))
         {
             // Check if it is a command
-            if (commandList.Contains(_inputString))
+            if (commandList.Contains(_inputString.ToLower()))
             {
-                switch (_inputString)
+                m_inputString = _inputString.ToLower();
+                outputController.FormatOutput(">" + m_inputString);
+                switch (m_inputString)
                 {
                     case "teach":
                         functionList.Teach();
@@ -35,9 +38,31 @@ public class InputEvalutor : MonoBehaviour
                     case "bits":
                         functionList.ShowBits();
                         break;
+                    case "help":
+                        functionList.Help();
+                        break;
+                    case "upgrade":
+                        functionList.ShowUpgrades();
+                        break;
                     default:
                         break;
                 }
+            }
+            else if (upgradeList.Contains(_inputString.ToLower()))
+            {
+                m_inputString = _inputString.ToLower();
+                outputController.FormatOutput(">" + m_inputString);
+                switch (m_inputString)
+                {
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                // Unknown Input 
+                
+                functionList.UnknownInput(_inputString);
             }
             
            

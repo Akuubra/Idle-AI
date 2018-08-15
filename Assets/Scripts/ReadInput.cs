@@ -28,7 +28,8 @@ public class ReadInput : MonoBehaviour {
             inputField.text = "";
         }
     }
-
+    
+    //Takes the text of the input field and checks whether its null or empty, if not send it to the evaluator
     public void ReadInputField()
     {
         m_textField = inputField.text;

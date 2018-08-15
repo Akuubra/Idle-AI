@@ -9,7 +9,7 @@ public class OutputController : MonoBehaviour
     // Output Object
     public Text outputField;
     // Caluclate maxNumberOfLines
-    private float m_fontSize = 35.0f;
+    private float m_fontSize = 30.0f;
     private float m_maxNumberOfLines;
     private float m_numberOflines = 0;
     // Hold output
@@ -20,7 +20,7 @@ public class OutputController : MonoBehaviour
     void Start () {
 
         // Calculate the number of lines that fit on the screen
-        m_maxNumberOfLines = Mathf.Floor((Screen.height / m_fontSize) - 2);
+        m_maxNumberOfLines = Mathf.Floor((Screen.height / (m_fontSize * 1.5f)) - 1);
         Debug.Log(m_maxNumberOfLines);
         outputField.supportRichText = true;
        // m_outputString = outputField.text;
@@ -33,6 +33,7 @@ public class OutputController : MonoBehaviour
 		
 	}
 
+    // Determines whether or not the top of the screen is reached if so delete the top line
     public void FormatOutput(string _output)
     {
         m_outputString = _output;
@@ -54,6 +55,8 @@ public class OutputController : MonoBehaviour
         //outputField.text = m_outputString;
     }
 
+
+    // Rereads the outputList and adds all lines to the output text
     private void UpdateOutput()
     {
         for(int lineIndex = 0; lineIndex < m_outputList.Count; ++lineIndex)

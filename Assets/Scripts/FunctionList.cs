@@ -20,11 +20,29 @@ public class FunctionList : MonoBehaviour {
     public void Teach()
     {
         ResourceController.IncrementBits();
+        //outputController.FormatOutput(">Teach");
         Debug.Log("Teach()");
     }
     public void ShowBits()
     {
-        outputController.FormatOutput(ResourceController.GetBits().ToString());
+        //outputController.()
+        outputController.FormatOutput("Current bits: " + ResourceController.GetBits().ToString());
         Debug.Log("ShowBits()");
+    }
+
+    public void Help()
+    {
+        Debug.Log("Help()");
+    }
+
+    public void UnknownInput(string _output)
+    {
+        outputController.FormatOutput(_output);
+        outputController.FormatOutput("<color=red>Error!</color> Unknown Command: " + _output);
+    }
+
+    public void ShowUpgrades()
+    {
+
     }
 }
